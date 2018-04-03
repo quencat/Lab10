@@ -43,7 +43,18 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] selectionSort(final int[] array) {
-        return null;
+        int index = 0;
+        int min = array[0];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
+                int temp = array[index];
+                array[index] = array[i];
+                array[i] = temp;
+                index++;
+            }
+        }
+        return array;
     }
 
     /**
@@ -54,7 +65,23 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] mergeSort(final int[] array) {
-        return null;
+        if (array.length == 1) {
+            return array;
+        }
+        if (array.length == 2) {
+            if (array[1] < array[0]) {
+                int temp = array[1];
+                array[1] = array[0];
+                array[0] = temp;
+            }
+            return array;
+        }
+        int middle = array.length / 2;
+        int[] first = Arrays.copyOfRange(array, 0, middle);
+        int[] second = Arrays.copyOfRange(array, middle + 1, array.length);
+        mergeSort(first);
+        mergeSort(second);
+        return merge(first, second);
     }
 
     /**
